@@ -1,0 +1,58 @@
+# Copyright 2020 Verily Life Sciences LLC
+#
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file or at
+# https://developers.google.com/open-source/licenses/bsd
+
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: metis Python package
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+  # Allows manually triggering workflow in GitHub UI on selected branch.
+  # GitHub doc: https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#workflow_dispatch.
+  # GitHub blog demo: https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/.
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7, 3.8]
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pylint pytest
+        cd py
+        pip install .
+
+    - name: Test with pytest
+      run: |
+        cd py
+        pytest
+
+# Disable lint check for now. Reenable after adjusting the 'disable' list or
+# fixing the lint.
+#
+#    - name: Lint with pylint
+#      run: |
+#        cd py
+#        pylint --disable=R,W,C0116,C0115,C0302,C0103,C0330 metis/

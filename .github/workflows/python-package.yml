@@ -44,10 +44,19 @@ jobs:
         cd py
         pip install .
 
-    - name: Test with pytest
+    - name: Test Python package with pytest
       run: |
         cd py
         pytest
+
+    # Simply 'Cell -> Run All` these notebooks and expect no errors.
+    # See also https://github.com/marketplace/actions/run-notebook if a more complicated
+    # workflow for notebooks is needed in the future.
+    - name: Execute all notebooks with nbconvert
+      run: |
+        pip install nbconvert
+        cd notebooks
+        for nb in *ipynb ; do jupyter nbconvert --to notebook --execute "${nb}" ; done
 
 # Disable lint check for now. Reenable after adjusting the 'disable' list or
 # fixing the lint.

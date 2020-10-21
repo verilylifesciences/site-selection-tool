@@ -282,7 +282,7 @@ def tts(ax, events, efficacy, color, linestyle):
     hist, bins = plot_utils.make_tts_hist(events, efficacy)
     bw = bins[1] - bins[0]
     ax.bar(bins[:-1], hist, width=bw, align='edge',
-           fc=fc, ec=color, ls=linestyle, lw=lw)
+           fc=color, ec=fc, ls=linestyle, lw=lw, alpha=0.3)
     format_hist_time_axis(ax, bins[:-1], date_format='%b-%d')
     ax.axvline(x=bins[-2], color='#656565', lw=1.0, ls='--')
 

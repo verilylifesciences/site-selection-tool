@@ -215,7 +215,7 @@ def summary_plots(ds, box, efficacies=(0.55, 0.75)):
 
     # Time to success
     num_cols = len(efficacies)
-    num_rows = 3
+    num_rows = 2
     num_plots = num_cols * num_rows
     fig, a = plot_utils.make_subplots(num_rows, num_cols, (10, 6.0), sharey='row')
     a[0].text(0.0, 1.25, 'Success day probability distribution',
@@ -229,14 +229,11 @@ def summary_plots(ds, box, efficacies=(0.55, 0.75)):
         ax = a[i]
         # tts
         plot.tts(ax, ds.control_arm_events, efficacy, pc, ls)
+        plot.tts(ax, ds.original_control_arm_events, efficacy, oc, ls)
         ax.set_title(f'{efficacy} Efficacy')
         ax.xaxis.set_tick_params(which='both', labelbottom=True)
 
         ax = a[i + num_cols]
-        plot.tts(ax, ds.original_control_arm_events, efficacy, oc, ls)
-        ax.xaxis.set_tick_params(which='both', labelbottom=True)
-
-        ax = a[i + 2*num_cols]
         plot.turn_spines_off(ax)
         ax.tick_params(axis='y', labelsize=12.5)
         plot.tts_diff(ax,

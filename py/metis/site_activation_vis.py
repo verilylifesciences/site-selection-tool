@@ -228,8 +228,8 @@ def summary_plots(ds, box, efficacies=(0.55, 0.75)):
     for i, efficacy in enumerate(efficacies):
         ax = a[i]
         # tts
-        plot.tts(ax, ds.control_arm_events, efficacy, bc, ls)
-        plot.tts(ax, ds.original_control_arm_events, efficacy, pc, ls)
+        plot.tts(ax, ds.control_arm_events, efficacy, pc, ls)
+        plot.tts(ax, ds.original_control_arm_events, efficacy, bc, ls)
         ax.set_title(f'{efficacy} Efficacy')
         ax.xaxis.set_tick_params(which='both', labelbottom=True)
 

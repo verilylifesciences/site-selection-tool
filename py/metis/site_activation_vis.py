@@ -175,7 +175,7 @@ def summary_plots(ds, box, efficacies=(0.55, 0.75)):
     # TODO add hist_events and hist_recruits
 
     pc = colors_config.ville_styles['gray_ville_3']['color']
-    bc = colors_config.ville_styles['highlight_ville_2']['color']
+    oc = colors_config.ville_styles['highlight_ville_2']['color']
     ls = '-'
 
     # Difference in recruits by participant label
@@ -204,7 +204,7 @@ def summary_plots(ds, box, efficacies=(0.55, 0.75)):
 
     # Total recruits
     plot.recruits('participant_label', a[1], original_unpack.sel(participant_label=labels_to_plot),
-                  bc, ls, label='original')
+                  oc, ls, label='original')
     plot.recruits('participant_label', a[1], proposed_unpack.sel(participant_label=labels_to_plot),
                   pc, ls, label='proposed')
     # for visibiliy, turn spines off
@@ -229,7 +229,7 @@ def summary_plots(ds, box, efficacies=(0.55, 0.75)):
         ax = a[i]
         # tts
         plot.tts(ax, ds.control_arm_events, efficacy, pc, ls)
-        plot.tts(ax, ds.original_control_arm_events, efficacy, bc, ls)
+        plot.tts(ax, ds.original_control_arm_events, efficacy, oc, ls)
         ax.set_title(f'{efficacy} Efficacy')
         ax.xaxis.set_tick_params(which='both', labelbottom=True)
 
@@ -262,7 +262,7 @@ def loc_plots(ds, box, loc_to_plot=None):
     fpd = ville_config.FIRST_PLOT_DAY
 
     pc = colors_config.ville_styles['gray_ville_3']['color']
-    bc = colors_config.ville_styles['highlight_ville_2']['color']
+    oc = colors_config.ville_styles['highlight_ville_2']['color']
     ls = '-'
 
     # select just what we want to look at
@@ -298,7 +298,7 @@ def loc_plots(ds, box, loc_to_plot=None):
     remove_dims = [plot_utils.find_time_dim(proposed_part)]
     for rd in remove_dims: p_dims.remove(rd)
 
-    plot.cum_recruits(axis, original_part.sum(p_dims), fpd, bc, ls)
+    plot.cum_recruits(axis, original_part.sum(p_dims), fpd, oc, ls)
     plot.cum_recruits(axis, proposed_part.sum(p_dims), fpd, pc, ls)
     plot.format_time_axis(axis, date_format='%b-%d')
     axis.set_title('Cumulative Recruits \n All Participants')
@@ -311,7 +311,7 @@ def loc_plots(ds, box, loc_to_plot=None):
     num_rows =  num_labels // num_cols + (num_labels % num_cols != 0)
     fig, a = plot_utils.make_subplots(num_rows, num_cols)
     fig.suptitle('Cumulative Recruits')
-    plot.cum_subrecruits(a, original_part, fpd, bc, ls)
+    plot.cum_subrecruits(a, original_part, fpd, oc, ls)
     plot.cum_subrecruits(a, proposed_part, fpd, pc, ls)
 
     int_utils.update_disp(box.children[2], fig)

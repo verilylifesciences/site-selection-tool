@@ -9,7 +9,7 @@
   * [Deployment](#deployment)
 * [Appendix](#appendix)
   * [git commands for a new feature branch](#how-to-work-on-a-new-feature-branch)
-  * [git commands to undo a commit in wrong branch](##i-accidentally-checked-a-new-change-to-my-main-branch-instead-of-a-feature-branch-how-to-fix-this)
+  * [git commands to undo a commit in wrong branch](#i-accidentally-checked-a-new-change-to-my-main-branch-instead-of-a-feature-branch-how-to-fix-this)
 
 # Get setup for GitHub
 

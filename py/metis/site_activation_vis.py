@@ -504,7 +504,7 @@ def make_rso_buttons(ds, sum_box, loc_box, t_box, loc_dropdown, t_dropdown, stat
         """Wrapper to save activations."""
         int_utils.set_status(status_button, 'Not_Ready')
         save_activation(ds)
-        int_utils.set_status(status_button, 'Not_Ready')
+        int_utils.set_status(status_button, 'Ready')
         return
 
     # Connect to buttons

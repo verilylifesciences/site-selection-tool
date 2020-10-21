@@ -8,12 +8,14 @@
   * [Development and testing](#development-and-testing)
   * [Deployment](#deployment)
 * [Appendix](#appendix)
+  * [git commands for a new feature branch](#how-to-work-on-a-new-feature-branch)
+  * [git commands to undo a commit in wrong branch](##i-accidentally-checked-a-new-change-to-my-main-branch-instead-of-a-feature-branch-how-to-fix-this)
 
 # Get setup for GitHub
 
 Small typos in code or documentation may be edited directly using the GitHub web interface. Otherwise:
 
-1. If you are new to GitHub, don't start here. Instead, work through a GitHub tutorial such as https://guides.github.com/activities/hello-world/
+1. If you are new to GitHub, don't start here. Instead, work through a GitHub tutorial such as [GitHub Hello World project](https://guides.github.com/activities/hello-world/).
 2. Create a fork of https://github.com/verilylifesciences/metis.
 3. Clone your fork to your local machine.
 4. Work from a feature branch. See the [Appendix](#appendix) for detailed `git` commands.
@@ -120,7 +122,7 @@ find . -name "*.ipynb" -type f -print0 | \
 For the metis GitHub repository, we are doing ‘merge and squash’ of pull requests. So that means your fork does not match upstream after your pull request has been merged. The easiest way to manage this is to always work in a feature branch, instead of checking changes into your fork’s main branch.
 
 
-## How to work on a new feature
+## How to work on a new feature branch
 
 (1) Get the latest version of the upstream repo
 

@@ -221,7 +221,7 @@ def summary_plots(ds, box, efficacies=(0.55, 0.75)):
     a[0].text(0.0, 1.25, 'Success day probability distribution',
               horizontalalignment='left', transform=a[0].transAxes,
               fontsize=16.)
-    a[num_rows].text(0.0, 1.0, 'Diff. in success day probability distribution',
+    a[num_rows].text(0.0, 1.0, 'Proposed - original success day difference',
               ha='left', va='bottom', transform=a[num_rows].transAxes,
               fontsize=16.)
 

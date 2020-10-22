@@ -6,22 +6,22 @@
 
 """Vis to compare the impact of site activations on trial outcomes."""
 
-import colors_config
+from metis import colors_config
 import datetime
-import interactive_utils as int_utils
+from metis import interactive_utils as int_utils
 import ipywidgets as widgets
 import functools
-import metis.io
+from metis import io as metis_io
 import numpy as np
 import os
-import optimization
+from metis import optimization
 import pathlib
-import plot
-import plot_utils
-import sim
-import sim_scenarios
-import table_utils
-import ville_config
+from metis import plot
+from metis import plot_utils
+from metis import sim
+from metis import sim_scenarios
+from metis import table_utils
+from metis import ville_config
 
 """An interactive exploration of how site activations impact trial outcomes.
 
@@ -467,7 +467,7 @@ def save_activation(ds):
     file_path = ville_config.SAVE_FILE_PATH
     # Make dir if it doesn't exist
     pathlib.Path(file_path).mkdir(exist_ok=True)
-    metis.io.write_ville_to_netcdf(ds, os.path.join(file_path, file_name),
+    metis_io.write_ville_to_netcdf(ds, os.path.join(file_path, file_name),
                                    file_open_fn)
 
 def make_rso_buttons(ds, sum_box, loc_box, t_box, loc_dropdown, t_dropdown, status_button):

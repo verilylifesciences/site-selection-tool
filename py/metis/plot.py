@@ -205,13 +205,13 @@ def recruits(dim_to_plot, ax, sorted_recruits, color, linestyle='-', label=None)
     """
     dims_to_sum = list(sorted_recruits.dims)
     dims_to_sum.remove(dim_to_plot)
-    fc= cc.TRANSPARENT_HIST_FACECOLOR
+    thc = cc.TRANSPARENT_HIST_COLOR
     bh = cc.BAR_HEIGHT
     lw = cc.LINE_WIDTH
 
     sum_rec = sorted_recruits.sum(dims_to_sum)
-    ax.barh(sum_rec[dim_to_plot], sum_rec, height=bh, fc=fc, ec=color,
-            ls=linestyle, lw=lw, label=label)
+    ax.barh(sum_rec[dim_to_plot], sum_rec, height=bh, fc=color, ec=thc,
+            alpha=0.3, ls=linestyle, lw=lw, label=label)
 
 def recruit_diffs(dim_to_plot, ax, sorted_recruits, recruits_left,
                   zero_left_edge=False):
@@ -277,12 +277,12 @@ def tts(ax, events, efficacy, color, linestyle):
         linestyle: A mpl linestyle
     """
     lw = cc.LINE_WIDTH
-    fc = cc.TRANSPARENT_HIST_FACECOLOR
-    ax.set_facecolor(fc)
+    thc = cc.TRANSPARENT_HIST_COLOR
+    ax.set_facecolor(thc)
     hist, bins = plot_utils.make_tts_hist(events, efficacy)
     bw = bins[1] - bins[0]
     ax.bar(bins[:-1], hist, width=bw, align='edge',
-           fc=color, ec=fc, ls=linestyle, lw=lw, alpha=0.3)
+           fc=color, ec=thc, ls=linestyle, lw=lw, alpha=0.3)
     format_hist_time_axis(ax, bins[:-1], date_format='%b-%d')
     ax.axvline(x=bins[-2], color='#656565', lw=1.0, ls='--')
 

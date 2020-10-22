@@ -200,7 +200,7 @@ def summary_plots(ds, box, efficacies=(0.55, 0.75)):
     plot.turn_spines_off(a[0])
     # To draw attention to xlabels, make them a little bigger
     a[0].tick_params(axis='x', labelsize=12.5)
-    a[0].set_title('Diff. from original')
+    a[0].set_title('Proposed - original recruits')
 
     # Total recruits
     plot.recruits('participant_label', a[1], original_unpack.sel(participant_label=labels_to_plot),

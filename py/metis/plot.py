@@ -6,13 +6,13 @@
 
 """Functions for plotting incidence, recruitment, and events in Metis."""
 
-import colors_config as cc
+from metis import colors_config as cc
 import matplotlib as mpl
 import numpy as np
 import pandas as pd
-import plot_utils
+from metis import plot_utils
 import warnings
-import ville_config
+from metis import ville_config
 
 # All functions here take an axis argument and modify it in place.
 # Functions in plot_utils return arguments.

@@ -6,13 +6,13 @@
 
 """Utils for plotting arrays in Metis."""
 
-import colors_config as cc
-import evaluation
+from metis import colors_config as cc
+from metis import evaluation
 import matplotlib as mpl
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 from matplotlib.figure import Figure
 import numpy as np
-import ville_config
+from metis import ville_config
 import warnings
 import xarray as xr
 

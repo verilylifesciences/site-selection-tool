@@ -155,7 +155,7 @@ def make_table_button(ds, box, status_button):
     partial_disp = functools.partial(update_table_by_button, ds, box, status_button)
     label_opts = plot_utils.get_labels_to_plot(ds.participants)
     label_opts += ['population', 'proposed_events', 'original_events']
-    table_dropdown = int_utils.new_dropdown(label_opts.sort(), 'Sort by:')
+    table_dropdown = int_utils.new_dropdown(label_opts, 'Sort by:')
     table_dropdown.observe(partial_disp, type='change', names='value')
     return table_dropdown
 
@@ -388,7 +388,7 @@ def make_loc_buttons(ds, sum_box, loc_box, t_box, t_dropdown, status_button,
         button_box: An ipywidgets Box containing a location selection
             dropdown as well as activation buttons.
     """
-    location_dropdown = int_utils.new_dropdown(list(ds.coords['location'].values),
+    location_dropdown = int_utils.new_dropdown(sorted(list(ds.coords['location'].values)),
                                                'Location to update.')
 
     # Connect button to functions to call when clicked

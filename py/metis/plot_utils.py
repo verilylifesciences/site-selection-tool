@@ -175,3 +175,17 @@ def get_labels_to_plot(da):
         labels_to_plot.remove(l)
 
     return labels_to_plot
+
+def join_in_time(ds, data_var):
+    """Join X and historical_X along time axis.
+
+    Args:
+        ds: An xr.Dataset
+        data_var: A string representing the data_var to join.
+    Returns:
+        joined: An xr.DataArray consisiting of data_var and
+            historical_data_var joined along the time dimension.
+    """
+    hist = ds[f'historical_{data_var}'].rename(historical_time='time')
+    joined = xr.concat((hist, ds[data_var]), dim='time')
+    return joined

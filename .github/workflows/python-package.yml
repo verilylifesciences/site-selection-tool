@@ -15,9 +15,9 @@ on:
   pull_request:
     branches: [ main ]
   workflow_dispatch:
-  # Allows manually triggering workflow in GitHub UI on selected branch.
-  # GitHub doc: https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#workflow_dispatch.
-  # GitHub blog demo: https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/.
+    # Allows manually triggering workflow in GitHub UI on selected branch.
+    # GitHub doc: https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#workflow_dispatch.
+    # GitHub blog demo: https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/.
 
 jobs:
   build:
@@ -49,13 +49,16 @@ jobs:
         cd py
         pytest
 
-    # Simply 'Cell -> Run All` these notebooks and expect no errors.
-    # See also https://github.com/marketplace/actions/run-notebook if a more complicated
-    # workflow for notebooks is needed in the future.
     - name: Execute all notebooks with nbconvert
+      # Simply 'Cell -> Run All` these notebooks and expect no errors.
+      # See also https://github.com/marketplace/actions/run-notebook if a more complicated
+      # workflow for notebooks is needed in the future.
       run: |
         pip install nbconvert
-        cd notebooks
+        # Ensure that notebooks depend only on installed package.
+        tmp_dir=$(mktemp -d -t ci-XXXXXXXXXX)
+        cp notebooks/*.ipynb $tmp_dir
+        cd $tmp_dir
         for nb in *ipynb ; do jupyter nbconvert --to notebook --execute "${nb}" ; done
 
 # Disable lint check for now. Reenable after adjusting the 'disable' list or

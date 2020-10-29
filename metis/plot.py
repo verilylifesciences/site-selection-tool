@@ -273,8 +273,8 @@ def tts(ax, events, efficacy, color, linestyle):
         events: An xr.DataArray representing the number of events in
             our control arm. Has dimensions (time, location, scenario)
         efficacy: A float representing the assumed vaccine efficacy.
-        color: A mpl color
-        linestyle: A mpl linestyle
+        color: A mpl color for the bar faces
+        linestyle: A mpl linestyle for the bar edges
     """
     lw = cc.LINE_WIDTH
     thc = cc.TRANSPARENT_HIST_COLOR

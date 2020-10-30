@@ -6,22 +6,22 @@
 
 """Vis to compare the impact of site activations on trial outcomes."""
 
-import colors_config
+from metis import colors_config
 import datetime
-import interactive_utils as int_utils
+from metis import interactive_utils as int_utils
 import ipywidgets as widgets
 import functools
-import metis.io
+from metis import io as metis_io
 import numpy as np
 import os
-import optimization
+from metis import optimization
 import pathlib
-import plot
-import plot_utils
-import sim
-import sim_scenarios
-import table_utils
-import ville_config
+from metis import plot
+from metis import plot_utils
+from metis import sim
+from metis import sim_scenarios
+from metis import table_utils
+from metis import ville_config
 
 """An interactive exploration of how site activations impact trial outcomes.
 
@@ -190,7 +190,7 @@ def summary_plots(ds, box, efficacies=(0.55, 0.75)):
     # TODO add hist_events and hist_recruits
 
     pc = colors_config.ville_styles['gray_ville_3']['color']
-    bc = colors_config.ville_styles['highlight_ville_2']['color']
+    oc = colors_config.ville_styles['highlight_ville_2']['color']
     ls = '-'
 
     # Difference in recruits by participant label
@@ -215,11 +215,11 @@ def summary_plots(ds, box, efficacies=(0.55, 0.75)):
     plot.turn_spines_off(a[0])
     # To draw attention to xlabels, make them a little bigger
     a[0].tick_params(axis='x', labelsize=12.5)
-    a[0].set_title('Diff. from original')
+    a[0].set_title('Proposed - original recruits')
 
     # Total recruits
     plot.recruits('participant_label', a[1], original_unpack.sel(participant_label=labels_to_plot),
-                  bc, ls, label='original')
+                  oc, ls, label='original')
     plot.recruits('participant_label', a[1], proposed_unpack.sel(participant_label=labels_to_plot),
                   pc, ls, label='proposed')
     # for visibiliy, turn spines off
@@ -236,15 +236,15 @@ def summary_plots(ds, box, efficacies=(0.55, 0.75)):
     a[0].text(0.0, 1.25, 'Success day probability distribution',
               horizontalalignment='left', transform=a[0].transAxes,
               fontsize=16.)
-    a[num_rows].text(0.0, 1.0, 'Diff. in success day probability distribution',
+    a[num_rows].text(0.0, 1.0, 'Proposed - original success day',
               ha='left', va='bottom', transform=a[num_rows].transAxes,
               fontsize=16.)
 
     for i, efficacy in enumerate(efficacies):
         ax = a[i]
         # tts
-        plot.tts(ax, ds.control_arm_events, efficacy, bc, ls)
-        plot.tts(ax, ds.original_control_arm_events, efficacy, pc, ls)
+        plot.tts(ax, ds.control_arm_events, efficacy, pc, ls)
+        plot.tts(ax, ds.original_control_arm_events, efficacy, oc, ls)
         ax.set_title(f'{efficacy} Efficacy')
         ax.xaxis.set_tick_params(which='both', labelbottom=True)
 
@@ -277,7 +277,7 @@ def loc_plots(ds, box, loc_to_plot=None):
     fpd = ville_config.FIRST_PLOT_DAY
 
     pc = colors_config.ville_styles['gray_ville_3']['color']
-    bc = colors_config.ville_styles['highlight_ville_2']['color']
+    oc = colors_config.ville_styles['highlight_ville_2']['color']
     ls = '-'
 
     # select just what we want to look at
@@ -313,7 +313,7 @@ def loc_plots(ds, box, loc_to_plot=None):
     remove_dims = [plot_utils.find_time_dim(proposed_part)]
     for rd in remove_dims: p_dims.remove(rd)
 
-    plot.cum_recruits(axis, original_part.sum(p_dims), fpd, bc, ls)
+    plot.cum_recruits(axis, original_part.sum(p_dims), fpd, oc, ls)
     plot.cum_recruits(axis, proposed_part.sum(p_dims), fpd, pc, ls)
     plot.format_time_axis(axis, date_format='%b-%d')
     axis.set_title('Cumulative Recruits \n All Participants')
@@ -326,7 +326,7 @@ def loc_plots(ds, box, loc_to_plot=None):
     num_rows =  num_labels // num_cols + (num_labels % num_cols != 0)
     fig, a = plot_utils.make_subplots(num_rows, num_cols)
     fig.suptitle('Cumulative Recruits')
-    plot.cum_subrecruits(a, original_part, fpd, bc, ls)
+    plot.cum_subrecruits(a, original_part, fpd, oc, ls)
     plot.cum_subrecruits(a, proposed_part, fpd, pc, ls)
 
     int_utils.update_disp(box.children[2], fig)
@@ -403,7 +403,7 @@ def make_loc_buttons(ds, sum_box, loc_box, t_box, t_dropdown, status_button,
         button_box: An ipywidgets Box containing a location selection
             dropdown as well as activation buttons.
     """
-    location_dropdown = int_utils.new_dropdown(list(ds.coords['location'].values),
+    location_dropdown = int_utils.new_dropdown(sorted(list(ds.coords['location'].values)),
                                                'Location to update.')
 
     # Connect button to functions to call when clicked
@@ -482,7 +482,7 @@ def save_activation(ds):
     file_path = ville_config.SAVE_FILE_PATH
     # Make dir if it doesn't exist
     pathlib.Path(file_path).mkdir(exist_ok=True)
-    metis.io.write_ville_to_netcdf(ds, os.path.join(file_path, file_name),
+    metis_io.write_ville_to_netcdf(ds, os.path.join(file_path, file_name),
                                    file_open_fn)
 
 def make_rso_buttons(ds, sum_box, loc_box, t_box, loc_dropdown, t_dropdown, status_button):

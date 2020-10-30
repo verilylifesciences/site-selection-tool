@@ -33,12 +33,16 @@ participant demographics and time to success (as determined by assumptions
 in the input files).
 """
 
-def site_activation(original_ville):
+def site_activation(original_ville, initial_proposed_activation=None):
     """Make the site activation display.
 
     Args:
         original_ville: An xr.Dataset containing the ville as it is now.
             This is what all changes will be compared against.
+        initial_proposed_activation: Optional. An xr.DataArray with dimensions
+            ('location',) or ('location', 'time') representing the proposed,
+            future site activations. If None, the site activations in
+            original_ville are used.
 
     Returns:
         widget: An ipywidget with the display.
@@ -47,6 +51,17 @@ def site_activation(original_ville):
     # TODO we are using the same scenarios throughout this ville
     # Add a button to regenerate the scenarios & rerun
     set_up_dataset(original_ville)
+
+    if initial_proposed_activation is not None:
+        if 'time' not in initial_proposed_activation.dims:
+            # If a time dimension wasn't provided, broadcast to time in original_ville
+            initial_proposed_activation = initial_proposed_activation.expand_dims({'time': original_ville.time})
+        original_ville['site_activation'] = initial_proposed_activation
+        participants = sim.recruitment(original_ville)
+        events = sim.control_arm_events(original_ville, participants,
+                                        original_ville.incidence_scenarios,
+                                        keep_location=True)
+        update_recruitment(original_ville, participants, events)
 
     str_time_start = np.datetime_as_string(original_ville.time.values[0], unit='D')
     str_time_end = np.datetime_as_string(original_ville.time.values[-1], unit='D')

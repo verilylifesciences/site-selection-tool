@@ -15,13 +15,17 @@ here = pathlib.Path(__file__).parent.resolve()
 requirements = (here / 'requirements.txt').read_text(encoding='utf-8')
 
 setup(
-    name='metis',
-    version='0.0.1',
-    license='BSD',
+  name='metis',
+  version='0.0.1',
+  license='BSD',
 
-    description='Metis',
+  description='Metis',
 
-    python_requires='>=3.7',
-    install_requires=requirements,
-    packages=find_packages(),
+  python_requires='>=3.7',
+  install_requires=requirements,
+  packages=find_packages(),
+  include_package_data=True,
+  package_data = {
+      '': ['demo_data/*'],
+  },
 )

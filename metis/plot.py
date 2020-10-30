@@ -6,13 +6,13 @@
 
 """Functions for plotting incidence, recruitment, and events in Metis."""
 
-import colors_config as cc
+from metis import colors_config as cc
 import matplotlib as mpl
 import numpy as np
 import pandas as pd
-import plot_utils
+from metis import plot_utils
 import warnings
-import ville_config
+from metis import ville_config
 
 # All functions here take an axis argument and modify it in place.
 # Functions in plot_utils return arguments.
@@ -205,13 +205,13 @@ def recruits(dim_to_plot, ax, sorted_recruits, color, linestyle='-', label=None)
     """
     dims_to_sum = list(sorted_recruits.dims)
     dims_to_sum.remove(dim_to_plot)
-    fc= cc.TRANSPARENT_HIST_FACECOLOR
+    thc = cc.TRANSPARENT_HIST_COLOR
     bh = cc.BAR_HEIGHT
     lw = cc.LINE_WIDTH
 
     sum_rec = sorted_recruits.sum(dims_to_sum)
-    ax.barh(sum_rec[dim_to_plot], sum_rec, height=bh, fc=fc, ec=color,
-            ls=linestyle, lw=lw, label=label)
+    ax.barh(sum_rec[dim_to_plot], sum_rec, height=bh, fc=color, ec=thc,
+            alpha=0.3, ls=linestyle, lw=lw, label=label)
 
 def recruit_diffs(dim_to_plot, ax, sorted_recruits, recruits_left,
                   zero_left_edge=False):
@@ -273,16 +273,16 @@ def tts(ax, events, efficacy, color, linestyle):
         events: An xr.DataArray representing the number of events in
             our control arm. Has dimensions (time, location, scenario)
         efficacy: A float representing the assumed vaccine efficacy.
-        color: A mpl color
-        linestyle: A mpl linestyle
+        color: A mpl color for the bar faces
+        linestyle: A mpl linestyle for the bar edges
     """
     lw = cc.LINE_WIDTH
-    fc = cc.TRANSPARENT_HIST_FACECOLOR
-    ax.set_facecolor(fc)
+    thc = cc.TRANSPARENT_HIST_COLOR
+    ax.set_facecolor(thc)
     hist, bins = plot_utils.make_tts_hist(events, efficacy)
     bw = bins[1] - bins[0]
     ax.bar(bins[:-1], hist, width=bw, align='edge',
-           fc=fc, ec=color, ls=linestyle, lw=lw)
+           fc=color, ec=thc, ls=linestyle, lw=lw, alpha=0.3)
     format_hist_time_axis(ax, bins[:-1], date_format='%b-%d')
     ax.axvline(x=bins[-2], color='#656565', lw=1.0, ls='--')
 

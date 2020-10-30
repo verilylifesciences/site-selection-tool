@@ -16,7 +16,7 @@ DIFF_NORM = mpl.colors.Normalize(vmin=-10, vmax=10)
 BAR_HEIGHT = 0.6
 BAR_CHART_FACECOLOR = '#d6d6d6'
 
-TRANSPARENT_HIST_FACECOLOR = (1, 1, 1, 0)
+TRANSPARENT_HIST_COLOR = (1, 1, 1, 0)
 LINE_WIDTH = 2.0
 
 # Settings used to color vlines on bar charts

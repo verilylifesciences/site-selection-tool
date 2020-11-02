@@ -113,7 +113,7 @@ def fetch_cdc_forecast(model, date_stamp, end_date=None, num_samples=None):
   # Restrict to the quantiles, discarding point predictions.
   df = df.query('type == "quantile"')
 
-  df.rename(columns=dict(target_end_date='time'), inplace=True)
+  df = df.rename(columns=dict(target_end_date='time'))
   df.loc[:, 'time'] = pd.to_datetime(df.time)
   df = df.set_index(['location', 'time', 'quantile'])['value']
   da = df.to_xarray()

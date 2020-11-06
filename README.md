@@ -2,7 +2,9 @@
 
 Project Metis implements simulation tools for clinical trial enrollment. Metis is being developed for the public good with the initial goal of expediting clinical validation of vaccine candidates for COVID-19, with a focus on targeted site selection to support enhanced recruitment for vaccine research. 
 
-Metis allows the user to input model forecasts for regional disease prevalence, as well as historical disease incidence data. One potential source of US-only model forecasts is the [CDC ensemble](https://www.cdc.gov/coronavirus/2019-ncov/cases-updates/forecasts-cases.html). A potential source of historical data is [Google Cloud’s open repository](https://github.com/GoogleCloudPlatform/covid-19-open-data).
+[Metis](https://github.com/verilylifesciences/metis/blob/Metis%20-%20Baseline.pdf) allows the user to input model forecasts for regional disease prevalence, as well as historical disease incidence data. One potential source of US-only model forecasts is the [CDC ensemble](https://www.cdc.gov/coronavirus/2019-ncov/cases-updates/forecasts-cases.html). A potential source of historical data is [Google Cloud’s open repository](https://github.com/GoogleCloudPlatform/covid-19-open-data).
+
+
 
 
 # How to use Metis

@@ -112,13 +112,19 @@ def set_up_dataset(ds):
     """
     # Modify in place
     ds['population'] = ds['population'].astype(np.int)
-    ds['original_activation'] = ds['site_activation'].copy(deep=True)
-    ds['original_participants'] = ds['participants']
-    ds['original_control_arm_events'] = ds['control_arm_events']
-    ds['original_events'] = ds['original_control_arm_events'].sum('time').mean('scenario')
-    ds['proposed_events'] = ds['control_arm_events'].sum('time').mean('scenario')
     if 'subregion1_name' in ds.data_vars: ds['SR1'] = ds['subregion1_name']
     if 'subregion2_name' in ds.data_vars: ds['SR2'] = ds['subregion2_name']
+    # Keep these as original data_vars, also keep historical_X
+    # Notebook cannot change incidence, so we do not save an original version
+    orig_data_vars = ['participants', 'control_arm_events', 'site_activation']
+
+    for var in orig_data_vars:
+        ds[f'original_{var}'] = ds[var].copy(deep=True)
+        ds[f'historical_original_{var}'] = ds[f'historical_{var}']
+
+    ds['original_events'] = ds['original_control_arm_events'].sum('time').mean('scenario') + ds['historical_original_control_arm_events'].sum('historical_time')
+    ds['proposed_events'] = ds['control_arm_events'].sum('time').mean('scenario') + ds['historical_control_arm_events'].sum('historical_time')
+
     return
 
 def disp_table(ds, box, label_to_sort_by, num_rows=10,
@@ -205,9 +211,11 @@ def summary_plots(ds, box, efficacies=(0.55, 0.75)):
               ha='left', va='top', transform=a[0].transAxes,
               fontsize=12.)
 
-    proposed_unpack = plot_utils.unpack_participant_labels(ds.participants)
-    original_unpack = plot_utils.unpack_participant_labels(ds.original_participants)
-    labels_to_plot = plot_utils.get_labels_to_plot(ds.participants)
+    joined_part = plot_utils.join_in_time(ds, 'participants')
+    original_joined_part = plot_utils.join_in_time(ds, 'original_participants')
+    proposed_unpack = plot_utils.unpack_participant_labels(joined_part)
+    original_unpack = plot_utils.unpack_participant_labels(original_joined_part)
+    labels_to_plot = plot_utils.get_labels_to_plot(joined_part)
 
     plot.recruit_diffs('participant_label', a[0], proposed_unpack.sel(participant_label=labels_to_plot),
                        original_unpack.sel(participant_label=labels_to_plot), True)
@@ -256,7 +264,6 @@ def summary_plots(ds, box, efficacies=(0.55, 0.75)):
                       ds.original_control_arm_events,
                       efficacy)
 
-
     int_utils.update_disp(box.children[1], fig)
 
 def loc_plots(ds, box, loc_to_plot=None):
@@ -281,10 +288,11 @@ def loc_plots(ds, box, loc_to_plot=None):
     ls = '-'
 
     # select just what we want to look at
-    proposed_part = ds.participants.sel(location=loc_to_plot)
-    original_part = ds.original_participants.sel(location=loc_to_plot)
     incidence = ds.incidence_flattened.sel(location=loc_to_plot)
-    # TODO add hist_incidence and hist_recruits
+    historical_incidence = ds.historical_incidence.sel(location=loc_to_plot)
+
+    proposed_part = plot_utils.join_in_time(ds, 'participants').sel(location=loc_to_plot)
+    original_part = plot_utils.join_in_time(ds, 'original_participants').sel(location=loc_to_plot)
 
     # Make plots
 
@@ -293,6 +301,7 @@ def loc_plots(ds, box, loc_to_plot=None):
     fig, axis = plot_utils.new_figure()
 
     plot.incidence(axis, incidence, fpd, 'k', '-')
+    plot.incidence(axis, historical_incidence, fpd, 'k', '-')
     plot.format_time_axis(axis, date_format='%b-%d')
     # TODO find a better way to align plots
     axis.text(-0.25, 1.1, f'Individual Trial Site \n {loc_to_plot}',
@@ -357,9 +366,9 @@ def update_recruitment(ds, new_participants, new_events):
         new_events: xr.DataArray representing new control arm cum_events.
             With dimensions (location, time, *participant_dims).
     """
-    ds['participants'] = new_participants
+    ds['participants'] = new_participants.sel(time=ds.time)
     ds['control_arm_events'] = new_events
-    ds['proposed_events'] = new_events.sum('time').mean('scenario')
+    ds['proposed_events'] = new_events.sum('time').mean('scenario') + ds['historical_control_arm_events'].sum('historical_time')
     return
 
 def change_activation(new_activation, loc_to_update, ds):
@@ -382,7 +391,7 @@ def change_activation(new_activation, loc_to_update, ds):
     # updating in place
     # changes for all time (not historical time)
     ds.site_activation[loc_arg] = new_activation
-    participants = sim.recruitment(ds)
+    participants = sim.recruitment(ds) # this has historical participants
     events = sim.control_arm_events(ds, participants, ds.incidence_scenarios,
                                     keep_location=True)
     update_recruitment(ds, participants, events)

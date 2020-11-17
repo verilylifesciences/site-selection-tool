@@ -39,9 +39,9 @@ jobs:
         python-version: 3.7
 
     - name: Setup gcloud CLI
-      uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      uses: google-github-actions/setup-gcloud@master
       # TO REUSE THIS TEMPLATE, configure auth.
-      # Step 1: Create a service account and store its key in GitHub secrets per these instructions:
+      # Step 1: Create a service account and store its key in GitHub as 'TERRA_SECRET' per these instructions:
       # https://github.com/google-github-actions/setup-gcloud/blob/master/setup-gcloud/README.md
       # Step 2: Register the service account with Terra per these instructions
       # https://github.com/broadinstitute/terra-tools/tree/master/scripts/register_service_account

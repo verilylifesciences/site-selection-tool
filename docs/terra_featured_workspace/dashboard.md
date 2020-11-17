@@ -30,6 +30,24 @@ Different trial designs will have different additional requirements for the simu
 ![white space](https://storage.cloud.google.com/terra-featured-workspaces/QuickStart/white-space.jpg)    
 
 ----------------------------
+## Notebooks
+
+* run_me_first : This notebook will install the [Metis toolkit](https://github.com/verilylifesciences/metis) on your Terra  [detachable persistent disk](https://support.terra.bio/hc/en-us/articles/360047318551-Detachable-Persistent-Disks-).
+* site_activation_demo : Provides the trial planner with an overview of the trial simulation.
+* trial_specification_demo : Walks through the construction of the dataset that contains the specification of a trial.
+
+### Cloud Environment
+
+Recommendation: Use the "default environment" which includes the following:
+
+| Option | Value |
+| --- | --- |
+| Environment | Default: (GATK 4.1.4.1, Python 3.7.9, R 4.0.3) |
+| CPU Minimum | 4|
+| Disk size Minimum | 50 GB |
+| Memory Minimum | 15 GB |
+
+----------------------------
 ## Next steps
 
 * Try these notebooks on your own data.

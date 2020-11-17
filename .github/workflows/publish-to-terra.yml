@@ -10,12 +10,8 @@ on:
     # Allows manually triggering of workflow on a selected branch via the GitHub Actions tab.
     # GitHub blog demo: https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/.
 
-  push:
-    # Publish tagged releases to Terra.
-    tags:
-
-    # TODO(deflaux): delete this branch trigger after testing is complete.
-    branches: [ deploy-to-terra ]
+  release:
+    types: [published]
 
 env:
   # TO REUSE THIS TEMPLATE, change these values to reflect those of your destination Terra workspace.

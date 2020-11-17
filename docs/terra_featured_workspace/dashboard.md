@@ -6,11 +6,11 @@ Metis allows the user to input model forecasts for regional disease prevalence, 
 * [Project Metis: Putting COVID models to work planning vaccine trials](https://github.com/verilylifesciences/metis/blob/main/Metis%20-%20Baseline.pdf) (PDF)
 * https://github.com/verilylifesciences/metis
 
-![white space](https://storage.cloud.google.com/terra-featured-workspaces/QuickStart/white-space.jpg)    
+![white space](https://storage.googleapis.com/terra-featured-workspaces/QuickStart/white-space.jpg)    
 
 Different trial designs will have different additional requirements for the simulations. You can reach the Project Metis team at metis@projectbaseline.com  to discuss how those changes can be added to this tool.
 
-![white space](https://storage.cloud.google.com/terra-featured-workspaces/QuickStart/white-space.jpg)    
+![white space](https://storage.googleapis.com/terra-featured-workspaces/QuickStart/white-space.jpg)    
 
 ----------------------------
 ## How long will it take to run? How much will it cost?
@@ -18,7 +18,7 @@ Different trial designs will have different additional requirements for the simu
 
 **Cost:** Using the default Cloud Runtime configuration, the Terra notebook runtime charges are $0.20/hour for Google Cloud service costs. It should cost less than a quarter to run the notebooks.
 
-![white space](https://storage.cloud.google.com/terra-featured-workspaces/QuickStart/white-space.jpg)    
+![white space](https://storage.googleapis.com/terra-featured-workspaces/QuickStart/white-space.jpg)    
 
 ----------------------------
 ## Get Started
@@ -27,7 +27,7 @@ Different trial designs will have different additional requirements for the simu
 1. Open `run_me_first.ipynb` and `Cell -> Run all`.
 1. Then open any other notebook and  `Cell -> Run all`.
 
-![white space](https://storage.cloud.google.com/terra-featured-workspaces/QuickStart/white-space.jpg)    
+![white space](https://storage.googleapis.com/terra-featured-workspaces/QuickStart/white-space.jpg)    
 
 ----------------------------
 ## Notebooks
@@ -54,25 +54,25 @@ Recommendation: Use the "default environment" which includes the following:
 * Take a look at https://github.com/verilylifesciences/metis to see the code and demonstration data used in this workspace.
 * Ask questions by [filing an issue](https://github.com/verilylifesciences/metis/issues) or emailing metis@projectbaseline.com.
 
-![white space](https://storage.cloud.google.com/terra-featured-workspaces/QuickStart/white-space.jpg)    
+![white space](https://storage.googleapis.com/terra-featured-workspaces/QuickStart/white-space.jpg)    
 
 ----------------------------
 ### How to use these notebooks with your own data
 
 When you want to **upload a CSV** to your workspace bucket, do this using the cloud console.
 
-![white space](https://storage.cloud.google.com/terra-featured-workspaces/QuickStart/white-space.jpg)    
+![white space](https://storage.googleapis.com/terra-featured-workspaces/QuickStart/white-space.jpg)    
 
 ![how to open the cloud console from Terra](https://storage.googleapis.com/terra-featured-workspaces/QuickStart/S51b_Workspaces_Google_bucket_Screen%20Shot.png)
 
-![white space](https://storage.cloud.google.com/terra-featured-workspaces/QuickStart/white-space.jpg)    
+![white space](https://storage.googleapis.com/terra-featured-workspaces/QuickStart/white-space.jpg)    
 
 Now, from the Metis notebooks, you can **refer to the file in the workspace bucket** like so:
 ```
 os.path.join(os.environ['WORKSPACE_BUCKET'], 'path/to/the/file/you/uploaded.csv')
 ```
 
-![white space](https://storage.cloud.google.com/terra-featured-workspaces/QuickStart/white-space.jpg)    
+![white space](https://storage.googleapis.com/terra-featured-workspaces/QuickStart/white-space.jpg)    
 
 ----------------------------
 # Workspace change log

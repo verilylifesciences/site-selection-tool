@@ -78,7 +78,7 @@ jobs:
         # By default, use the SHA of the commit for the version.
         VERSION="${{ github.sha }}"
         # But for tags, strip the prefix from tag name to use just the tag value as the version.
-        [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo "${{ github.ref }}" | sed -e 's:/refs/tags/::')
+        [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo "${{ github.ref }}" | sed -e 's:refs/tags/::')
 
         # Fill in the setup notebook template.
         cat run_me_first.ipynb | sed -e s:metis.git:metis.git@${VERSION}: > run_me_first.ipynbWithVersion

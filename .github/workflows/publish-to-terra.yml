@@ -16,9 +16,8 @@ on:
 env:
   # TO REUSE THIS TEMPLATE, change these values to reflect those of your destination Terra workspace.
   NAMESPACE: 'verily-metis'
-  # TODO(deflaux) update these after testing is complete.
-  WORKSPACE: 'Metis-toolkit-for-vaccine-trial-planning-test-copy'
-  WORKSPACE_BUCKET: 'fc-107e2aa4-42f8-444e-a084-8e437ec10835'
+  WORKSPACE: 'Metis-toolkit-for-vaccine-trial-planning
+  WORKSPACE_BUCKET: 'fc-560ade3c-d2e9-4968-b307-eda0f53d04b6'
 
 jobs:
 

@@ -39,6 +39,7 @@ jobs:
       # TO REUSE THIS TEMPLATE, configure auth.
       # Step 1: Create a service account and store its key in GitHub as 'TERRA_SECRET' per these instructions:
       # https://github.com/google-github-actions/setup-gcloud/blob/master/setup-gcloud/README.md
+      # https://docs.github.com/en/free-pro-team@latest/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository
       # Step 2: Register the service account with Terra per these instructions
       # https://github.com/broadinstitute/terra-tools/tree/master/scripts/register_service_account
       # Step 3: Share the destination Terra workspace with the service account, granting it

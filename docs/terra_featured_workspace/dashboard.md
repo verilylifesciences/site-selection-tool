@@ -32,9 +32,9 @@ Different trial designs will have different additional requirements for the simu
 ----------------------------
 ## Notebooks
 
-* run_me_first : This notebook will install the [Metis toolkit](https://github.com/verilylifesciences/metis) on your Terra  [detachable persistent disk](https://support.terra.bio/hc/en-us/articles/360047318551-Detachable-Persistent-Disks-).
-* trial_specification_demo : Use the Metis tool to specify and emit one or more different trial plans.
-* site_activation_demo : For a particular trial plan, visualize how the trial is proceeding at a per site level and experiment with what will happen when you turn up or down different sites.
+* **run_me_first** : This notebook will install the [Metis toolkit](https://github.com/verilylifesciences/metis) on your Terra  [detachable persistent disk](https://support.terra.bio/hc/en-us/articles/360047318551-Detachable-Persistent-Disks-).
+* **trial_specification_demo** : Use the Metis tool to specify and emit one or more different trial plans.
+* **site_activation_demo** : For a particular trial plan, visualize how the trial is proceeding at a per site level and experiment with what will happen when you turn up or down different sites.
 
 ### Cloud Environment
 

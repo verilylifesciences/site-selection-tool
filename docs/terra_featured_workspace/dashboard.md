@@ -1,4 +1,4 @@
-Metis is a decision support tool built for vaccine trial planners, especially for when models of future disease prevalence are unreliable. Metis is being developed for the public good with the initial goal of expediting clinical validation of vaccine candidates for COVID-19, with a focus on targeted site selection to support enhanced recruitment for vaccine research. 
+Metis, named after the Greek goddess of wisdom, is a decision support tool built for vaccine trial planners, especially for when models of future disease prevalence are unreliable. Metis is being developed for the public good with the initial goal of expediting clinical validation of vaccine candidates for COVID-19, with a focus on targeted site selection to support enhanced recruitment for vaccine research. 
 
 Metis can quantify and visualize the likely outcome of specific vaccine trial plans, allows for interactive scenario evaluation, and implements mathematical optimizations to recommend alternatives. Metis operates down to the county/hospital level and can incorporate any epidemiological model(s) or predictions.
 

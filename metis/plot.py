@@ -280,7 +280,7 @@ def tts(ax, events, efficacy, color, linestyle):
     thc = cc.TRANSPARENT_HIST_COLOR
     ax.set_facecolor(thc)
     hist, bins = plot_utils.make_tts_hist(events, efficacy)
-    bw = bins[1] - bins[0]
+    bw = bins[2] - bins[1]
     ax.bar(bins[:-1], hist, width=bw, align='edge',
            fc=color, ec=thc, ls=linestyle, lw=lw, alpha=0.3)
     format_hist_time_axis(ax, bins[:-1], date_format='%b-%d')

@@ -1,4 +1,4 @@
-# Development and deployment instructions for metis
+# Development and deployment instructions for BSST
 
 * [Get setup for GitHub](#get-setup-for-github)
 * [Developer tools setup](#developer-tools-setup)
@@ -61,7 +61,7 @@ nbdiff-web notebooks/test.ipynb
 
 When you use [Terra](https://app.terra.bio/), notebooks are stored in the `notebooks` folder of your workspace bucket. Terra does not natively support source control integration, but we can do it manually.
 
-By convention, for the Metis project the "source of truth" for the notebooks is source control, not Terra storage. Author new notebooks in your sandbox Terra workspace, but be sure to check them in as you reach good stopping points.
+By convention, for the Baseline Site Selection Tool the "source of truth" for the notebooks is source control, not Terra storage. Author new notebooks in your sandbox Terra workspace, but be sure to check them in as you reach good stopping points.
 
 Option 1, **recommended**: The easy way to transfer notebooks is to use the Terra UI to manually upload and download notebooks to your git clone on your local machine.
 

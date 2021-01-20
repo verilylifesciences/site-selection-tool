@@ -4,7 +4,7 @@
 # license that can be found in the LICENSE file or at
 # https://developers.google.com/open-source/licenses/bsd
 
-"""A setuptools based module for PIP installation of the Metis package."""
+"""A setuptools based module for PIP installation of the Baseline Site Selection Tool."""
 
 import pathlib
 from setuptools import find_packages
@@ -19,7 +19,7 @@ setup(
   version='0.0.1',
   license='BSD',
 
-  description='Metis',
+  description='Baseline Site Selection Tool',
 
   python_requires='>=3.7',
   install_requires=requirements,

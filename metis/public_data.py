@@ -190,6 +190,8 @@ def assemble_forecast(full_gt, full_pred, site_df, time):
   start_day, end_day = time[0], time[-1]
   time_resolution = time[1] - time[0]
   opencovid_keys = site_df.opencovid_key.unique()
+  assert full_gt.time.values[-1] < full_pred.time.values[-1], (
+      'Predictions must extend farther into the future than ground truth data.')
 
   # Use ground truth for as many full time periods as you have it.
   sliced_pred = full_pred.sel(

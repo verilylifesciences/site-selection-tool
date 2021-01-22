@@ -51,6 +51,36 @@ class SimTest(absltest.TestCase):
         jnp.array(incidence_scenarios.values))
     np.testing.assert_allclose(events.values, events_, atol=1e-6)
 
+  def test_events_agreement_no_observation_delay(self):
+    participants, incidence_scenarios = (
+        sim_test_util.participants_and_forecast())
+
+    c = sim_test_util.c_to_test_events()
+    c['observation_delay'] = 0
+    events = sim.control_arm_events(c, participants, incidence_scenarios)
+    events_ = sim.differentiable_control_arm_events(
+        sim.JaxDataset(c), jnp.array(participants.values),
+        jnp.array(incidence_scenarios.values))
+    np.testing.assert_allclose(events.values, events_, atol=1e-6)
+
+  def test_bad_observation_delay_errors(self):
+    participants, incidence_scenarios = (
+        sim_test_util.participants_and_forecast())
+
+    c = sim_test_util.c_to_test_events()
+
+    c['observation_delay'] = -1
+    with self.assertRaisesRegex(ValueError,
+                                'Observation delay .* negative'):
+      events = sim.control_arm_events(c, participants, incidence_scenarios)
+      sim.control_arm_events(c, participants, incidence_scenarios)
+
+    c['observation_delay'] = participants.time.size + 1
+    with self.assertRaisesRegex(ValueError,
+                                'Observation delay .* greater than the trial'):
+      events = sim.control_arm_events(c, participants, incidence_scenarios)
+      sim.control_arm_events(c, participants, incidence_scenarios)
+
   def test_nan_participants_error(self):
     participants, incidence_scenarios = (
         sim_test_util.participants_and_forecast())

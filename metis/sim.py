@@ -267,10 +267,15 @@ def control_arm_events(c,
   if incidence_scenarios.isnull().any():
     raise ValueError('NaNs in incidence_scenarios array!')
 
+  observation_delay = int(c.observation_delay)
+  if observation_delay < 0 or participants.time.size < observation_delay:
+    raise ValueError(f'Observation delay ({observation_delay}) is negative or '
+                     f'greater than the trial duration.')
+
   # Restrict to control arm participants.
   participants = participants * c.proportion_control_arm
   # Switch to start of observation instead of recruitment date.
-  participants = participants.shift(time=int(c.observation_delay)).fillna(0.0)
+  participants = participants.shift(time=observation_delay).fillna(0.0)
 
   # Treat all participants whose observation period starts on or before the
   # first day of forecast as starting on the first day of forecast.
@@ -329,7 +334,8 @@ def shift_pad_zeros(arr, shift, axis):
   axis = axis % len(arr.shape)  # to handle things like axis=-1
   sl = (slice(None),) * axis
   zeros = jnp.zeros_like(arr[sl + (slice(0, shift),)])
-  return jnp.concatenate([zeros, arr[sl + (slice(None, -shift),)]], axis=axis)
+  trim_last_n = slice(None, arr.shape[axis] - shift)
+  return jnp.concatenate([zeros, arr[sl + (trim_last_n,)]], axis=axis)
 
 
 def differentiable_control_arm_events(c, participants, incidence_scenarios):

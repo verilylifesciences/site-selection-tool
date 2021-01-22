@@ -280,19 +280,19 @@ def optimize_params(c,
   historical_events_ = jnp.array(historical_events.values)
 
   if loss_fn is None:
-    loss_fn = negative_mean_successiness(c)
+    loss_fn = negative_mean_successiness
 
   def loss(params):
     parameterizer.apply_params(c_, params)
-    participants_ = recruitment_fn(c_)
+    c_.participants = recruitment_fn(c_)
     control_arm_events_ = sim.differentiable_control_arm_events(
-        c_, participants_, incidence_scenarios_)
+        c_, c_.participants, incidence_scenarios_)
     historical_ = jnp.broadcast_to(
         historical_events_,
         control_arm_events_.shape[:1] + historical_events_.shape)
-    control_arm_events_ = jnp.concatenate([historical_, control_arm_events_],
+    c_.control_arm_events = jnp.concatenate([historical_, control_arm_events_],
                                           axis=1)
-    return loss_fn(control_arm_events_).mean()
+    return loss_fn(c_).mean()
 
   if optimization_params is None:
     optimization_params = dict()
@@ -360,9 +360,6 @@ def negative_mean_successiness(c):
     center = float(c.needed_control_arm_events)
     width = center / 3
 
-  def loss_fn(control_arm_events):
-    cum_events = control_arm_events.cumsum(axis=-1)
-    successiness = nn.sigmoid((cum_events - center) / width)
-    return -successiness.mean(axis=-1)
-
-  return loss_fn
+  cum_events = c.control_arm_events.cumsum(axis=-1)
+  successiness = nn.sigmoid((cum_events - center) / width)
+  return -successiness.mean(axis=-1)

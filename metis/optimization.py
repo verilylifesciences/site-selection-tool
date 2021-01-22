@@ -249,8 +249,8 @@ def optimize_params(c,
   """Modifies c in place subject to parameterizer to minimize a loss function.
 
   Picks params and runs parameterizer.xr_apply_params(c, params) to minimize
-  loss_fn on the control arm event curves given incidence_scenarios. The final
-  optimized params are stored in c['final_params'].
+  loss_fn on the resulting trial given incidence_scenarios. The final optimized
+  params are stored in c['final_params'].
 
   Args:
     c: xr.Dataset specifying the trial with all data_vars required to call
@@ -259,9 +259,9 @@ def optimize_params(c,
       forecast incidence.
     parameterizer: a Parameterizer specifying what the trial planner can
       control.
-    loss_fn: optional function which takes trajectories of control arm events
-      (an jnp.array of shape [scenario, time]) and returns a jnp.array of losses
-      of shape [scenario]. Defaults to negative_mean_successiness.
+    loss_fn: optional function which takes a jax-ified trial object and returns
+      a jnp.array of losses of shape [scenario]. Defaults to
+      negative_mean_successiness.
     optimization_params: optional dict of stuff related to how to do the
       optimization.
     verbose: if True, print some stuff.

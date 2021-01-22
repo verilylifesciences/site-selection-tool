@@ -266,7 +266,7 @@ def optimize_params(c,
       optimization.
     verbose: if True, print some stuff.
   """
-  # Run non-differentiable simulation once, because they do more error checking.
+  # Run non-differentiable simulation once, because it does more error checking.
   participants = sim.recruitment(c)
   sim.control_arm_events(c, participants, incidence_scenarios)
 

@@ -291,7 +291,7 @@ def optimize_params(c,
         historical_events_,
         control_arm_events_.shape[:1] + historical_events_.shape)
     c_.control_arm_events = jnp.concatenate([historical_, control_arm_events_],
-                                          axis=1)
+                                            axis=1)
     return loss_fn(c_).mean()
 
   if optimization_params is None:

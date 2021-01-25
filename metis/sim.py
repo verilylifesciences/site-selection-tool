@@ -445,6 +445,7 @@ def add_stuff_to_ville(c, incidence_model, site_df, num_scenarios=300):
     incidence_model: xr.DataArray of shape [model, sample, location, time], the
       forecast incidence.
     site_df: pd.Dataframe with information about sites.
+    num_scenarios: the number of scenarios to generate.
   """
   included_days = np.logical_and(c.time.values[0] <= incidence_model.time,
                                  incidence_model.time <= c.time.values[-1])

@@ -249,8 +249,8 @@ def optimize_params(c,
   """Modifies c in place subject to parameterizer to minimize a loss function.
 
   Picks params and runs parameterizer.xr_apply_params(c, params) to minimize
-  loss_fn on the control arm event curves given incidence_scenarios. The final
-  optimized params are stored in c['final_params'].
+  loss_fn on the resulting trial given incidence_scenarios. The final optimized
+  params are stored in c['final_params'].
 
   Args:
     c: xr.Dataset specifying the trial with all data_vars required to call
@@ -259,9 +259,9 @@ def optimize_params(c,
       forecast incidence.
     parameterizer: a Parameterizer specifying what the trial planner can
       control.
-    loss_fn: optional function which takes trajectories of control arm events
-      (an jnp.array of shape [scenario, time]) and returns a jnp.array of losses
-      of shape [scenario]. Defaults to negative_mean_successiness.
+    loss_fn: optional function which takes a jax-ified trial object and returns
+      a jnp.array of losses of shape [scenario]. Defaults to
+      negative_mean_successiness.
     optimization_params: optional dict of stuff related to how to do the
       optimization.
     verbose: if True, print some stuff.
@@ -280,19 +280,19 @@ def optimize_params(c,
   historical_events_ = jnp.array(historical_events.values)
 
   if loss_fn is None:
-    loss_fn = negative_mean_successiness(c)
+    loss_fn = negative_mean_successiness
 
   def loss(params):
     parameterizer.apply_params(c_, params)
-    participants_ = recruitment_fn(c_)
+    c_.participants = recruitment_fn(c_)
     control_arm_events_ = sim.differentiable_control_arm_events(
-        c_, participants_, incidence_scenarios_)
+        c_, c_.participants, incidence_scenarios_)
     historical_ = jnp.broadcast_to(
         historical_events_,
         control_arm_events_.shape[:1] + historical_events_.shape)
-    control_arm_events_ = jnp.concatenate([historical_, control_arm_events_],
-                                          axis=1)
-    return loss_fn(control_arm_events_).mean()
+    c_.control_arm_events = jnp.concatenate([historical_, control_arm_events_],
+                                            axis=1)
+    return loss_fn(c_).mean()
 
   if optimization_params is None:
     optimization_params = dict()
@@ -360,9 +360,6 @@ def negative_mean_successiness(c):
     center = float(c.needed_control_arm_events)
     width = center / 3
 
-  def loss_fn(control_arm_events):
-    cum_events = control_arm_events.cumsum(axis=-1)
-    successiness = nn.sigmoid((cum_events - center) / width)
-    return -successiness.mean(axis=-1)
-
-  return loss_fn
+  cum_events = c.control_arm_events.cumsum(axis=-1)
+  successiness = nn.sigmoid((cum_events - center) / width)
+  return -successiness.mean(axis=-1)

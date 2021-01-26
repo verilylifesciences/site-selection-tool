@@ -72,13 +72,11 @@ class SimTest(absltest.TestCase):
     c['observation_delay'] = -1
     with self.assertRaisesRegex(ValueError,
                                 'Observation delay .* negative'):
-      events = sim.control_arm_events(c, participants, incidence_scenarios)
       sim.control_arm_events(c, participants, incidence_scenarios)
 
     c['observation_delay'] = participants.time.size + 1
     with self.assertRaisesRegex(ValueError,
                                 'Observation delay .* greater than the trial'):
-      events = sim.control_arm_events(c, participants, incidence_scenarios)
       sim.control_arm_events(c, participants, incidence_scenarios)
 
   def test_nan_participants_error(self):

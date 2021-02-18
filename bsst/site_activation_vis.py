@@ -6,22 +6,22 @@
 
 """Vis to compare the impact of site activations on trial outcomes."""
 
-from metis import colors_config
+from bsst import colors_config
 import datetime
-from metis import interactive_utils as int_utils
+from bsst import interactive_utils as int_utils
 import ipywidgets as widgets
 import functools
-from metis import io as metis_io
+from bsst import io as bsst_io
 import numpy as np
 import os
-from metis import optimization
+from bsst import optimization
 import pathlib
-from metis import plot
-from metis import plot_utils
-from metis import sim
-from metis import sim_scenarios
-from metis import table_utils
-from metis import ville_config
+from bsst import plot
+from bsst import plot_utils
+from bsst import sim
+from bsst import sim_scenarios
+from bsst import table_utils
+from bsst import ville_config
 
 """An interactive exploration of how site activations impact trial outcomes.
 
@@ -487,11 +487,11 @@ def save_activation(ds):
     file_open_fn = ville_config.FILE_OPEN_FN
     # autogenerate the file_name
     timestamp = datetime.datetime.now().strftime('%Y_%m_%d_%H_%M_%S')
-    file_name = f'metis_{timestamp}.nc'
+    file_name = f'bsst_{timestamp}.nc'
     file_path = ville_config.SAVE_FILE_PATH
     # Make dir if it doesn't exist
     pathlib.Path(file_path).mkdir(exist_ok=True)
-    metis_io.write_ville_to_netcdf(ds, os.path.join(file_path, file_name),
+    bsst_io.write_ville_to_netcdf(ds, os.path.join(file_path, file_name),
                                    file_open_fn)
 
 def make_rso_buttons(ds, sum_box, loc_box, t_box, loc_dropdown, t_dropdown, status_button):

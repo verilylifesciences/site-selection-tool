@@ -13,8 +13,8 @@
 import numpy as np
 import pandas as pd
 import xarray as xr
-from metis import sim
-from metis import util
+from bsst import sim
+from bsst import util
 
 
 def c_to_test_recruitment(rand=None):

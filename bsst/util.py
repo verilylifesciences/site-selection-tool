@@ -4,7 +4,7 @@
 # license that can be found in the LICENSE file or at
 # https://developers.google.com/open-source/licenses/bsd
 
-"""General purpose utilities for metis."""
+"""General purpose utilities for bsst."""
 
 import numpy as np
 import pandas as pd

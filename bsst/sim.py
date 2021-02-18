@@ -15,8 +15,8 @@ import jax
 import jax.numpy as jnp
 import numpy as np
 import xarray as xr
-from metis import sim_scenarios
-from metis import util
+from bsst import sim_scenarios
+from bsst import util
 
 
 class JaxDataset:

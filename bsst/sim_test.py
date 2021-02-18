@@ -4,15 +4,15 @@
 # license that can be found in the LICENSE file or at
 # https://developers.google.com/open-source/licenses/bsd
 
-"""Tests for metis.sim."""
+"""Tests for bsst.sim."""
 
 from absl.testing import absltest
 import jax
 import jax.numpy as jnp
 import numpy as np
 import xarray as xr
-from metis import sim
-from metis import sim_test_util
+from bsst import sim
+from bsst import sim_test_util
 
 
 class SimTest(absltest.TestCase):

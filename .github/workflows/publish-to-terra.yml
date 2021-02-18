@@ -16,7 +16,7 @@ on:
 env:
   # TO REUSE THIS TEMPLATE, change these values to reflect those of your destination Terra workspace.
   NAMESPACE: 'verily-metis'
-  WORKSPACE: 'Metis-toolkit-for-vaccine-trial-planning'
+  WORKSPACE: 'Site-selection-tool-for-vaccine-trial-planning'
   WORKSPACE_BUCKET: 'fc-560ade3c-d2e9-4968-b307-eda0f53d04b6'
 
 jobs:
@@ -54,7 +54,7 @@ jobs:
         pip install firecloud==0.16.25
 
         # TO REUSE THIS TEMPLATE, update the code to match your file and directory structure.
-        # This particular example is based on the structure of https://github.com/verilylifesciences/metis
+        # This particular example is based on the structure of https://github.com/verilylifesciences/site-selection-tool
 
         # Change to the directory holding the workspace assets.
         cd notebooks/
@@ -81,7 +81,7 @@ jobs:
         [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo "${{ github.ref }}" | sed -e 's:refs/tags/::')
 
         # Fill in the setup notebook template.
-        cat run_me_first.ipynb | sed -e s:metis.git:metis.git@${VERSION}: > run_me_first.ipynbWithVersion
+        cat run_me_first.ipynb | sed -e s:site-selection-tool.git:site-selection-tool.git@${VERSION}: > run_me_first.ipynbWithVersion
 
         # Publish the setup notebook.
         gsutil cp run_me_first.ipynbWithVersion "gs://${WORKSPACE_BUCKET}/notebooks/run_me_first.ipynb"

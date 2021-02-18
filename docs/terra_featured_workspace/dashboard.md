@@ -3,8 +3,8 @@ The Baseline Site Selection Tool (BSST) is a decision support tool built for vac
 BSST can quantify and visualize the likely outcome of specific vaccine trial plans, allows for interactive scenario evaluation, and implements mathematical optimizations to recommend alternatives. BSST operates down to the county/hospital level and can incorporate any epidemiological model(s) or predictions.
 
 BSST allows the user to input model forecasts for regional disease prevalence, as well as historical disease incidence data. One potential source of US-only model forecasts is the [CDC ensemble](https://www.cdc.gov/coronavirus/2019-ncov/cases-updates/forecasts-cases.html). A potential source of historical data is [Google Cloud’s open repository](https://github.com/GoogleCloudPlatform/covid-19-open-data). For more detail, please see:
-* [Baseline Site Selection Tool: Putting COVID models to work planning vaccine trials](https://github.com/verilylifesciences/metis/blob/main/BaselineSiteSelectionTool.pdf) (PDF)
-* https://github.com/verilylifesciences/metis
+* [Baseline Site Selection Tool: Putting COVID models to work planning vaccine trials](https://github.com/verilylifesciences/site-selection-tool/blob/main/BaselineSiteSelectionTool.pdf) (PDF)
+* https://github.com/verilylifesciences/site-selection-tool
 
 ![white space](https://storage.googleapis.com/terra-featured-workspaces/QuickStart/white-space.jpg)    
 
@@ -32,7 +32,7 @@ Different trial designs will have different additional requirements for the simu
 ----------------------------
 ## Notebooks
 
-* **run_me_first** : This notebook will install the [Baseline Site Selection Tool](https://github.com/verilylifesciences/metis) on your Terra  [detachable persistent disk](https://support.terra.bio/hc/en-us/articles/360047318551-Detachable-Persistent-Disks-).
+* **run_me_first** : This notebook will install the [Baseline Site Selection Tool](https://github.com/verilylifesciences/site-selection-tool) on your Terra  [detachable persistent disk](https://support.terra.bio/hc/en-us/articles/360047318551-Detachable-Persistent-Disks-).
 * **trial_specification_demo** : Use the Baseline Site Selection Tool to specify and emit one or more different trial plans.
 * **site_activation_demo** : For a particular trial plan, visualize how the trial is proceeding at a per site level and experiment with what will happen when you turn up or down different sites.
 
@@ -51,8 +51,8 @@ Recommendation: Use the "default environment" which includes the following:
 ## Next steps
 
 * Try these notebooks on your own data.
-* Take a look at https://github.com/verilylifesciences/metis to see the code and demonstration data used in this workspace.
-* Ask questions by [filing an issue](https://github.com/verilylifesciences/metis/issues) or emailing site-selection-tool@projectbaseline.com.
+* Take a look at https://github.com/verilylifesciences/site-selection-tool to see the code and demonstration data used in this workspace.
+* Ask questions by [filing an issue](https://github.com/verilylifesciences/site-selection-tool/issues) or emailing site-selection-tool@projectbaseline.com.
 
 ![white space](https://storage.googleapis.com/terra-featured-workspaces/QuickStart/white-space.jpg)    
 
@@ -76,4 +76,4 @@ os.path.join(os.environ['WORKSPACE_BUCKET'], 'path/to/the/file/you/uploaded.csv'
 
 ----------------------------
 # Workspace change log
-Please see https://github.com/verilylifesciences/metis/releases for the change log.
+Please see https://github.com/verilylifesciences/site-selection-tool/releases for the change log.

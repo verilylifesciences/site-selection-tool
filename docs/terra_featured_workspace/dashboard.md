@@ -8,7 +8,7 @@ BSST allows the user to input model forecasts for regional disease prevalence, a
 
 ![white space](https://storage.googleapis.com/terra-featured-workspaces/QuickStart/white-space.jpg)    
 
-Different trial designs will have different additional requirements for the simulations. You can reach the Baseline Site Selection Tool team at metis@projectbaseline.com  to discuss how those changes can be added to this tool.
+Different trial designs will have different additional requirements for the simulations. You can reach the Baseline Site Selection Tool team at site-selection-tool@projectbaseline.com  to discuss how those changes can be added to this tool.
 
 ![white space](https://storage.googleapis.com/terra-featured-workspaces/QuickStart/white-space.jpg)    
 
@@ -52,7 +52,7 @@ Recommendation: Use the "default environment" which includes the following:
 
 * Try these notebooks on your own data.
 * Take a look at https://github.com/verilylifesciences/metis to see the code and demonstration data used in this workspace.
-* Ask questions by [filing an issue](https://github.com/verilylifesciences/metis/issues) or emailing metis@projectbaseline.com.
+* Ask questions by [filing an issue](https://github.com/verilylifesciences/metis/issues) or emailing site-selection-tool@projectbaseline.com.
 
 ![white space](https://storage.googleapis.com/terra-featured-workspaces/QuickStart/white-space.jpg)    
 

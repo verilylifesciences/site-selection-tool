@@ -17,7 +17,7 @@ env:
   # TO REUSE THIS TEMPLATE, change these values to reflect those of your destination Terra workspace.
   NAMESPACE: 'verily-metis'
   WORKSPACE: 'Site-selection-tool-for-vaccine-trial-planning'
-  WORKSPACE_BUCKET: 'fc-560ade3c-d2e9-4968-b307-eda0f53d04b6'
+  WORKSPACE_BUCKET: 'fc-1b04e69d-1159-4d3b-bffd-bbdba582044f'
 
 jobs:
 

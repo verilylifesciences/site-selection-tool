@@ -10,5 +10,5 @@
 FROM us.gcr.io/broad-dsp-gcr-public/terra-jupyter-gatk:1.0.8
 # https://github.com/DataBiosphere/terra-docker/blob/master/terra-jupyter-gatk/CHANGELOG.md
 
-RUN pip3 install --user git+https://github.com/verilylifesciences/metis.git \
+RUN pip3 install --user git+https://github.com/verilylifesciences/site-selection-tool.git \
  && pip3 install --user pre-commit nbdime nbstripout

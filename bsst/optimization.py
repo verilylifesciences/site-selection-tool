@@ -15,7 +15,7 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 
-import metis.sim as sim
+import bsst.sim as sim
 
 
 class Parameterizer:

@@ -7,7 +7,7 @@
 """Utils to implement sortable tables."""
 
 import pandas as pd
-from metis import plot_utils
+from bsst import plot_utils
 
 def sort_table(ds_first, da_participants, ds_last, sort_col):
     """Sort the table and return as a pd.DataFrame indexed by location.

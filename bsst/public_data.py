@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 import scipy
 import xarray as xr
-from metis import util
+from bsst import util
 
 # By default, these will be populated from covid19-open-data. Overwrite these
 # module variables if you want to use your own.

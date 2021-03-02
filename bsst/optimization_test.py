@@ -4,16 +4,16 @@
 # license that can be found in the LICENSE file or at
 # https://developers.google.com/open-source/licenses/bsd
 
-"""Tests for metis.optimization."""
+"""Tests for bsst.optimization."""
 
 from absl.testing import absltest
 from absl.testing import parameterized
 import numpy as np
 import pandas as pd
 import xarray as xr
-from metis import optimization
-from metis import sim_test_util
-from metis import util
+from bsst import optimization
+from bsst import sim_test_util
+from bsst import util
 
 
 def make_pivot_activation_inputs():

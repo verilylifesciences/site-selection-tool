@@ -4,13 +4,13 @@
 # license that can be found in the LICENSE file or at
 # https://developers.google.com/open-source/licenses/bsd
 
-"""Tests for metis.util."""
+"""Tests for bsst.util."""
 
 from absl.testing import absltest
 import numpy as np
 import scipy.stats
 import xarray as xr
-from metis import util
+from bsst import util
 
 
 class UtilTest(absltest.TestCase):

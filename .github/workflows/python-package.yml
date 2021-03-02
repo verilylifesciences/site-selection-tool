@@ -7,7 +7,7 @@
 # This workflow will install Python dependencies, run tests and lint with a variety of Python versions
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: Test Metis Python package and notebooks
+name: Test Baseline Site Selection Tool Python package and notebooks
 
 on:
   push:
@@ -64,4 +64,4 @@ jobs:
 #
 #    - name: Lint with pylint
 #      run: |
-#        pylint --disable=R,W,C0116,C0115,C0302,C0103,C0330 metis/
+#        pylint --disable=R,W,C0116,C0115,C0302,C0103,C0330 bsst/

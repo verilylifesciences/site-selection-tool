@@ -4,15 +4,15 @@
 # license that can be found in the LICENSE file or at
 # https://developers.google.com/open-source/licenses/bsd
 
-"""Functions for plotting incidence, recruitment, and events in Metis."""
+"""Functions for plotting incidence, recruitment, and events in the Baseline Site Selection Tool."""
 
-from metis import colors_config as cc
+from bsst import colors_config as cc
 import matplotlib as mpl
 import numpy as np
 import pandas as pd
-from metis import plot_utils
+from bsst import plot_utils
 import warnings
-from metis import ville_config
+from bsst import ville_config
 
 # All functions here take an axis argument and modify it in place.
 # Functions in plot_utils return arguments.

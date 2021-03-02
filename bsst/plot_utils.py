@@ -4,15 +4,15 @@
 # license that can be found in the LICENSE file or at
 # https://developers.google.com/open-source/licenses/bsd
 
-"""Utils for plotting arrays in Metis."""
+"""Utils for plotting arrays in the Baseline Site Selection Tool."""
 
-from metis import colors_config as cc
-from metis import evaluation
+from bsst import colors_config as cc
+from bsst import evaluation
 import matplotlib as mpl
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 from matplotlib.figure import Figure
 import numpy as np
-from metis import ville_config
+from bsst import ville_config
 import warnings
 import xarray as xr
 

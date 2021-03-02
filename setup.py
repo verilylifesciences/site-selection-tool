@@ -15,7 +15,7 @@ here = pathlib.Path(__file__).parent.resolve()
 requirements = (here / 'requirements.txt').read_text(encoding='utf-8')
 
 setup(
-  name='metis',
+  name='bsst',
   version='0.0.1',
   license='BSD',
 

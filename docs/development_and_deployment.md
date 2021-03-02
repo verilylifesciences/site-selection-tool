@@ -16,7 +16,7 @@
 Small typos in code or documentation may be edited directly using the GitHub web interface. Otherwise:
 
 1. If you are new to GitHub, don't start here. Instead, work through a GitHub tutorial such as [GitHub Hello World project](https://guides.github.com/activities/hello-world/).
-2. Create a fork of https://github.com/verilylifesciences/metis.
+2. Create a fork of https://github.com/verilylifesciences/site-selection-tool.
 3. Clone your fork to your local machine.
 4. Work from a feature branch. See the [Appendix](#appendix) for detailed `git` commands.
 
@@ -27,11 +27,11 @@ You only need to do these steps once in the location where you have the clone.
 ```
 # Tip: run this outside of your git clone, such as under ${HOME}/my-venvs
 cd path/to/where/I/keep/my/venvs
-python3 -m venv metis-env
+python3 -m venv bsst-env
 ```
 2. Activate the [virtual environment](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/#creating-a-virtual-environment).
 ```
-source metis-env/bin/activate
+source bsst-env/bin/activate
 ```
 3. Install [pre-commit](https://pre-commit.com/), a framework for managing and maintaining multi-language pre-commit hooks, [nbdime](https://nbdime.readthedocs.io/en/latest/) a tool for diffing and merging of Jupyter notebooks, and [nbstripout](https://github.com/kynan/nbstripout), a tool to strip output from Jupyter notebooks.
 ```
@@ -39,7 +39,7 @@ pip3 install pre-commit nbdime nbstripout
 ```
 4. Enable nbdime, nbstripout, and install the git hook scripts.
 ```
-cd path/to/my/clone/of/metis
+cd path/to/my/clone/of/bsst
 pre-commit install
 nbdime config-git --enable
 nbstripout --install
@@ -76,8 +76,8 @@ If you want to edit the code in the Docker container for testing purposes (so th
 1. open the Jupyter console by right clicking on the Jupyter logo to open it in a new tab ![jupyter logo](https://jupyter.org/assets/nav_logo.svg)
 2. in the terminal, move the code to your [detachable persistent disk](https://support.terra.bio/hc/en-us/articles/360047318551) and create a symbolic link
 ```
-mv ${HOME}/metis_pkg ${HOME}/notebooks/
-ln -s ${HOME}/notebooks/metis_pkg ${HOME}/
+mv ${HOME}/bsst_pkg ${HOME}/notebooks/
+ln -s ${HOME}/notebooks/bsst_pkg ${HOME}/
 ```
 Now you can view and edit code files via the Jupyter console!
 
@@ -95,7 +95,7 @@ gcloud --billing-project verily-metis-data \
   --project verily-metis-data \
   builds submit \
   --timeout 20m \
-  --tag gcr.io/verily-metis-data/metis_terra:`date +"%Y%m%d_%H%M%S"` .
+  --tag gcr.io/verily-metis-data/bsst_terra:`date +"%Y%m%d_%H%M%S"` .
 ```
 The image is now ready for use on your Terra VM!
 
@@ -111,15 +111,15 @@ Update the setup documentation embedded within your notebook(s) so that users ru
 # OPTIONAL: To update the Docker tag in the setup cell of all the notebooks in-place, run a command
 # similar to the following and then check them in. Do this in the source of truth (your Git
 # clone), not Terra.
-cd path/to/my/clone/of/metis
+cd path/to/my/clone/of/bsst
 find . -name "*.ipynb" -type f -print0 | \
   xargs -0 perl -i -pe \
-  's/gcr.io\/verily-metis-data\/metis_terra:\d{8}_\d{6}/gcr.io\/verily-metis-data\/metis_terra:20200919_163335/g'
+  's/gcr.io\/verily-metis-data\/bsst_terra:\d{8}_\d{6}/gcr.io\/verily-metis-data\/bsst_terra:20200919_163335/g'
 ```
 
 # Appendix
 
-For the metis GitHub repository, we are doing ‘merge and squash’ of pull requests. So that means your fork does not match upstream after your pull request has been merged. The easiest way to manage this is to always work in a feature branch, instead of checking changes into your fork’s main branch.
+For the bsst GitHub repository, we are doing ‘merge and squash’ of pull requests. So that means your fork does not match upstream after your pull request has been merged. The easiest way to manage this is to always work in a feature branch, instead of checking changes into your fork’s main branch.
 
 
 ## How to work on a new feature branch
@@ -134,7 +134,7 @@ Note: If you get an error saying that upstream is unknown, run the following rem
 
 ```
 # You only need to do this once per git clone.
-git remote add upstream https://github.com/verilylifesciences/metis.git
+git remote add upstream https://github.com/verilylifesciences/site-selection-tool.git
 ```
 
 (2) Make sure your main branch is “even” with upstream.

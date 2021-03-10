@@ -87,12 +87,24 @@ def sort_incidence_flattened(incidence_flattened):
   sample_idx = incidence_flattened.sum('time').argsort(axis=0)
   location_idx = xr.ones_like(sample_idx) * np.arange(
       incidence_flattened.location.size)
+  # Stack indexing arrays, because the arguments to isel have to be
+  # 1-dimensional.
   sample_idx = sample_idx.stack(
       sample_location=('sample_flattened', 'location'))
   location_idx = location_idx.stack(
       sample_location=('sample_flattened', 'location'))
-  incidence_flattened = incidence_flattened.isel(
-      location=location_idx, sample_flattened=sample_idx).unstack()
+
+  incidence_flattened = incidence_flattened.isel(location=location_idx,
+                                                 sample_flattened=sample_idx)
+
+  # When we do the multi-index isel above, the old coordinates are retained,
+  # even if they're part of the multi-index (as of xarray 0.17). This leads to
+  # a crash when we call unstack() because the coordinates sample_flattened and
+  # location are duplicated; see
+  # https://github.com/verilylifesciences/site-selection-tool/issues/32
+  # To fix this, we drop the extra coords before unstacking.
+  incidence_flattened = incidence_flattened.drop(
+      ('location', 'sample_flattened')).unstack()
   return incidence_flattened
 
 

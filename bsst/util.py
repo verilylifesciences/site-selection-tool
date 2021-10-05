@@ -203,14 +203,23 @@ def linear_interpolation_weights(x, xnew):
   is required).
 
   Args:
-    x: a 1-dimensional *sorted* np.array.
+    x: a 1-dimensional *sorted* np.array of length at least 2 with no duplicate
+      values.
     xnew: a 1-dimensional np.array
 
   Returns:
     A 2-dimensional np.array of weights of shape (len(x), len(xnew)) satisfying
     np.dot(x, weights) == xnew
     where weights[:, i] has two consecutive non-zero entries summing to 1.
+
+  Raises:
+    ValueError if x is not sorted, contains duplicates, or is too short.
   """
+  if len(x) < 2:
+    raise ValueError(f'Interpolation array must be of length at least 2\n{x}')
+  if not (np.diff(x) > 0).all():
+    raise ValueError(f'Interpolation array must be sorted and cannot contain '
+                     f'duplicates:{x}')
   xnew_indices = np.searchsorted(x, xnew)
   hi = np.minimum(np.maximum(xnew_indices, 1), len(x) - 1)
   lo = hi - 1
@@ -228,7 +237,8 @@ def quantile_conversion_weights(quantiles, new_quantiles):
   Assumes values are normally distributed.
 
   Args:
-    quantiles: a sorted 1-dimesional np.array of values between 0.0 and 1.0.
+    quantiles: a sorted 1-dimesional np.array of at least two values between
+      0.0 and 1.0, with no duplicates.
     new_quantiles: a 1-dimensional np.array of values between 0.0 and 1.0.
 
   Returns:

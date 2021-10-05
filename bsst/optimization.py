@@ -157,9 +157,7 @@ class PivotTableActivation(Parameterizer):
         num_activated = new_activation[group_idx].sum()
         if num_activated > num_allowed:
           squashed = (num_allowed / num_activated) * new_activation[group_idx]
-          new_activation = jax.ops.index_update(new_activation,
-                                                jax.ops.index[group_idx],
-                                                squashed)
+          new_activation = new_activation.at[group_idx].set(squashed)
         elif self.force_hit_cap:
           # Same idea as above, but squash towards 1 instead of towards 0.
           max_new_possible = 1 - persistence_and_deactivation[group_idx]
@@ -170,24 +168,18 @@ class PivotTableActivation(Parameterizer):
           if total_excess_available > total_excess_required:
             scaler = total_excess_required / total_excess_available
           squashed = new_activation[group_idx] + scaler * excess_available
-          new_activation = jax.ops.index_update(new_activation,
-                                                jax.ops.index[group_idx],
-                                                squashed)
+          new_activation = new_activation.at[group_idx].set(squashed)
       adjusted_activation = persistence_and_deactivation + new_activation
-      site_activation = jax.ops.index_update(site_activation,
-                                             jax.ops.index[i, :],
-                                             adjusted_activation)
+      site_activation = site_activation.at[i, :].set(adjusted_activation)
 
     # Expand from [decision_day, location] to [time, location].
     c.site_activation = jnp.zeros(c.site_activation.shape)
     for i in range(len(self.decision_day_idx) - 1):
       day_idx = self.decision_day_idx[i]
       next_day_idx = self.decision_day_idx[i + 1]
-      c.site_activation = jax.ops.index_update(
-          c.site_activation, jax.ops.index[:, day_idx:next_day_idx],
+      c.site_activation = c.site_activation.at[:, day_idx:next_day_idx].set(
           site_activation[i, :, jnp.newaxis])
-    c.site_activation = jax.ops.index_update(
-        c.site_activation, jax.ops.index[:, self.decision_day_idx[-1]:],
+    c.site_activation = c.site_activation.at[:, self.decision_day_idx[-1]:].set(
         site_activation[-1, :, jnp.newaxis])
 
   def _new_and_old_activation(self, site_activation: jnp.array):

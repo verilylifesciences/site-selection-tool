@@ -11,7 +11,6 @@
 
 from typing import List
 from flax import nn
-import jax
 import jax.numpy as jnp
 import numpy as np
 import xarray as xr
@@ -387,7 +386,7 @@ def differentiable_control_arm_events(c, participants, incidence_scenarios):
   # You cannot have an event before the start of observation.
   t_less_than_o = (slice(None),) + jnp.triu_indices_from(
       ctrl_arm_events[0], k=1)
-  ctrl_arm_events = jax.ops.index_update(ctrl_arm_events, t_less_than_o, 0.0)
+  ctrl_arm_events = ctrl_arm_events.at[t_less_than_o].set(0.0)
 
   return ctrl_arm_events.sum(axis=-1)
 

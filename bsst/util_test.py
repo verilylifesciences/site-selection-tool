@@ -28,6 +28,15 @@ class UtilTest(absltest.TestCase):
       if lo > 0 and hi < len(x) - 1:
         self.assertTrue(x[lo] <= xnew_i <= x[hi])
 
+  def test_linear_interpolation_weights_repeated_values(self):
+    rand = np.random.RandomState(seed=0)
+    x = rand.rand(3)
+    x = np.concatenate([x, x])
+    x.sort()
+    xnew = np.linspace(0, 1, 5)
+    with self.assertRaisesRegex(ValueError, 'cannot contain duplicates'):
+        weights = util.linear_interpolation_weights(x, xnew)
+
   def test_quantile_conversion_weights(self):
     quantiles = np.array([0.025, 0.1, 0.25, .5, .75, .9, .975])
     new_quantiles = np.arange(1, 100) / 100

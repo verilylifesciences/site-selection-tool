@@ -24,8 +24,9 @@ Different trial designs will have different additional requirements for the simu
 ## Get Started
 
 1. Clone this workspace.
-1. Open `run_me_first.ipynb` and `Cell -> Run all`.
-1. Then open any other notebook and  `Cell -> Run all`.
+2. Use a machine with at least 4 CPU and 15 GB RAM.
+3. Open `run_me_first.ipynb` and `Cell -> Run all`.
+4. Then open any other notebook and  `Cell -> Run all`.
 
 ![white space](https://storage.googleapis.com/terra-featured-workspaces/QuickStart/white-space.jpg)    
 
@@ -38,15 +39,12 @@ Different trial designs will have different additional requirements for the simu
 
 ### Cloud Environment
 
-Recommendation: Use the "default environment" which includes the following:
-
 | Option | Value |
 | --- | --- |
-| Environment | Default: (GATK 4.1.4.1, Python 3.7.9, R 4.0.3) |
-| CPU Minimum | 4|
+| Application configuration | Default |
+| CPU Minimum | 4 |
 | Disk size Minimum | 50 GB |
 | Memory Minimum | 15 GB |
-
 ----------------------------
 ## Next steps
 

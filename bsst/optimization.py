@@ -7,8 +7,8 @@
 """Optimization of vaccine trials."""
 
 from absl import logging
-from flax import nn
 from flax import optim
+from jax import nn
 import jax
 import jax.numpy as jnp
 import numpy as np

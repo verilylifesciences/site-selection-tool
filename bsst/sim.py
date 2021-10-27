@@ -10,7 +10,7 @@
 # pytype: skip-file
 
 from typing import List
-from flax import nn
+from jax import nn
 import jax.numpy as jnp
 import numpy as np
 import xarray as xr
